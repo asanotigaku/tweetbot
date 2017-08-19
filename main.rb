@@ -5,7 +5,8 @@ require 'tweetstream'
 require 'slack/incoming/webhooks'
 require 'yaml'
 
-ID_UN_NERV			= 116548789
+ID_JMA_KISHOU		= 2923658012
+ID_UN_NERV		= 116548789
 ID_TENKI_JP_JISHIN	= 599969854
 
 yml = YAML.load_file("secret.yml")
@@ -35,8 +36,10 @@ begin
 		text = status.text
 		next if(text=~/^RT/)
 		case status.user.id
+		when ID_JMA_KISHOU then
+			client.retweet status.id
 		when ID_TENKI_JP_JISHIN then
-			client.retweet(status.id)
+			client.retweet status.id
 		when ID_UN_NERV then
 			if text.include?("緊急地震速報")
 				client.retweet status.id
