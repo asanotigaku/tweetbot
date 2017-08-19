@@ -44,6 +44,8 @@ begin
 			elsif text.include?("噴火") || text.include?("火山速報")
 				client.retweet status.id
 				volcano.post text
+			elsif text.include?("気象") || text.include?("天気") || text.include("注意情報")
+				client.retweet status.id
 			end
 		end
  	}
